@@ -27,8 +27,8 @@ describe("stack", () => {
     expect(instance.stackSize()).toBe(1);
 
     instance.stackPush("bar");
-    expect(instance.stackPeek()).toBe("bar");
-    expect(instance.stackSize()).toBe(2);
+    expect(instance.peek()).toBe("bar");
+    expect(instance.size).toBe(2);
   });
 
   it("should remove and return the item from the top of the stack", () => {

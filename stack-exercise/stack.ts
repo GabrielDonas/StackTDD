@@ -10,42 +10,48 @@ Don't use an array or array methods on the implementation.
 //[X] pop: Remove and return the item from the top of the stack.
 //[X] peek: Returns the item at the top of the stack without removing it.
 //[X] size: Returns the total number of items in the stack.
-//[] isEmpty: Checks whether the stack is empty.
 //[X] isFull: Checks whether the stack is full.
 
-export class Stack {
-  private myStack: Record<string, string>;
-  private size: number;
 
-  constructor(size: number) {
+export class Stack<T> {
+  private myStack: Record<number, T>;
+  private maxSize: number;
+
+  constructor(maxSize: number) {
     this.myStack = {};
-    this.size = size;
+    this.maxSize = maxSize;
   }
 
-  public stackPush(item: string) {
+  public push(item: T): void {
     this.myStack[this.stackSize()] = item;
-    return this.stackPeek();
   }
 
-  public stackSize() {
+  public get size(): number {
     return Object.keys(this.myStack).length;
   }
 
-  public stackPeek() {
+  public peek(): T | undefined {
+    //edge empty array
     return this.myStack[this.stackSize() - 1];
   }
 
-  public stackPop() {
+  public pop(): T | undefined {
+    //edge empty array
     const lastItem = this.stackPeek();
-    delete this.myStack[this.stackSize() - 1];
+    if(lastItem){
+      delete this.myStack[this.stackSize() - 1];
+    }
     return lastItem;
   }
 
-  public stackIsFull() {
-    return this.stackSize() === this.size;
+  public isFull(): boolean {
+    return this.stackSize() === this.maxSize;
   }
 
-  public stackIsEmpty() {
+  public isEmpty(): boolean {
     return this.stackSize() === 0;
   }
 }
+
+const ryan = new Stack(20);
+ryan.push(person)
